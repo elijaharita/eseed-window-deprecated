@@ -238,6 +238,23 @@ WinSize WindowWin32::getSize() {
     };
 }
 
+std::vector<const char*> WindowWin32::getRequiredInstanceExtensionNames() {
+    return {
+        VK_KHR_SURFACE_EXTENSION_NAME,
+        VK_KHR_WIN32_SURFACE_EXTENSION_NAME
+    };
+}
+
+vk::SurfaceKHR WindowWin32::createSurface(vk::Instance instance) {
+    vk::Win32SurfaceCreateInfoKHR ci;
+    ci.hwnd = hWnd;
+    ci.hinstance = hInstance;
+
+    auto surface = instance.createWin32SurfaceKHR(ci);
+
+    return surface;
+}
+
 LRESULT CALLBACK WindowWin32::windowProc(
     HWND hWnd, 
     UINT uMsg, 
@@ -289,4 +306,11 @@ LRESULT CALLBACK WindowWin32::windowProc(
     }
 
     return DefWindowProc(hWnd, uMsg, wParam, lParam);
+}
+
+std::unique_ptr<Window> esdw::createWindow(
+    WinSize size, 
+    std::string title
+) {
+    return std::make_unique<WindowWin32>(size, title);
 }

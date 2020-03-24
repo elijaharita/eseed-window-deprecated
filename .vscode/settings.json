@@ -46,7 +46,6 @@
         "xutility": "cpp"
     },
     "cmake.configureSettings": {
-        "ESDW_ENABLE_VULKAN_SUPPORT": "ON",
         "ESDW_ENABLE_TESTING": "ON"
     }
 }

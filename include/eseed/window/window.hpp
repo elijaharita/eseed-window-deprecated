@@ -63,6 +63,7 @@ public:
 };
 
 // Platform-agnostic function to create a window for the native platform
+// Definitions in platform-specific source files
 std::unique_ptr<Window> createWindow(
     WinSize size,
     std::string title
